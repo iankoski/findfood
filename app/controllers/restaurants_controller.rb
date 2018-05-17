@@ -13,15 +13,17 @@ class RestaurantsController < ApplicationController
   end
 
   # GET /restaurants/new
-  def new
-    @restaurant = Restaurant.new
-  end
+
 
   def homepage
     @restaurants = Restaurant.all.order(:name)
     @categories = Category.all
     @restaurants = Meal.all.where(category: params[:category_id]) unless params[:category_id].blank?
     @restaurants = Meal.all.where("UPPER(name) like ?", "%#{params[:search_term].to_s.upcase}%") unless params[:search_term].blank?
+  end
+
+  def new
+    @restaurant = Restaurant.new
   end
 
   # GET /restaurants/1/edit

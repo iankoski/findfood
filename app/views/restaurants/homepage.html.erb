@@ -1,61 +1,62 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Restaurantes</h1>
 
-<table>
-  <thead>
-  <tr>
-    <th>Nome</th>
-    <th>Telefone</th>
-    <th>Endereço</th>
-    <th colspan="3"></th>
-  </tr>
-  </thead>
+<div class="row">
+  <div class="col-xs-8">
 
-  <tbody>
-  <% Restaurant.all.order(:name).each do |restaurant| %>
+  <table class="table">
+    <thead class="thead-dark">
     <tr>
-      <td><%= link_to restaurant.name, restaurant %></td>
-      <td><%= restaurant.phone %></td>
-      <td><%= restaurant.address %></td>
+      <th>Nome</th>
+      <th>Telefone</th>
+      <th>Endereço</th>
 
-      <td><%= link_to 'Editar', edit_restaurant_path(restaurant) %></td>
-      <td><%= link_to 'Remover', restaurant, method: :delete, data: {confirm: 'Esta certo disso?'} %></td>
     </tr>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
+  <tbody>
+    <% Restaurant.all.order(:name).each do |restaurant| %>
+     <tr>
+       <td><%= link_to restaurant.name, restaurant %></td>
+       <td><%= restaurant.phone %></td>
+        <td><%= restaurant.address %></td>
 
-<div class="col-xs-4">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Categorias</h3>
-    </div>
-    <div class="panel-body">
-      <ul>
-        <% @categories.each do |category| %>
-          <li>
-            <%= link_to category.name, homepage_restaurants_path(category_id: category.id) %>
-          </li>
-        <% end %>
-      </ul>
-
-    </div>
-  </div>
-
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title">Search</h3>
-  </div>
-  <div class="panel-body">
-    <%= form_tag("/restaurants/homepage", method: "post") do %>
-      <%= text_field_tag(:search_term) %>
-      <%= submit_tag("Buscar") %>
+        <td><%= link_to 'Editar', edit_restaurant_path(restaurant) %></td>
+        <td><%= link_to 'Remover', restaurant, method: :delete, data: {confirm: 'Esta certo disso?'} %></td>
+      </tr>
     <% end %>
+    </tbody>
+  </table>
+
+    <div class="col-xs-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Categorias</h3>
+        </div>
+        <div class="panel-body">
+          <ul>
+            <% @categories.each do |category| %>
+              <li>
+                <%= link_to category.name, homepage_restaurants_path(category_id: category.id) %>
+              </li>
+            <% end %>
+          </ul>
+
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Busca</h3>
+        </div>
+        <div class="panel-body">
+          <%= form_tag("/restaurants/homepage", method: "post") do %>
+            <%= text_field_tag(:search_term) %>
+            <%= submit_tag("Buscar") %>
+          <% end %>
+
+        </div>
+      </div>
 
   </div>
+    <%= link_to 'Novo restaurante', new_restaurant_path %>
 </div>
-
-<br>
-
-<%= link_to 'Novo restaurante', new_restaurant_path %>
+</div>
