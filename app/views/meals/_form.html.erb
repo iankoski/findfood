@@ -1,0 +1,49 @@
+<%= form_with(model: meal, local: true) do |form| %>
+  <% if meal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(meal.errors.count, "error") %> prohibited this meal from being saved:</h2>
+
+      <ul>
+      <% meal.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label 'Nome' %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Preço' %>
+    <%= form.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Tempo de preparo' %>
+    <%= form.time_select :cookingTime %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Ingredientes' %>
+    <%= collection_check_boxes :meal, :ingredient_ids, Ingredient.all, :id, :name do |b| %>
+      <%= b.label {b.check_box + b.text} %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Categoria' %>
+    <%= form.select :category_id, Category.all.collect {|category| [category.name, category.id]} %>
+  </div>
+
+  <div class="field">
+    <%= form.label 'Restaurante' %>
+    <%= form.select :restaurant_id, Restaurant.all.collect {|restaurant| [restaurant.name, restaurant.id]} %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
