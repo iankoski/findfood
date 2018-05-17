@@ -30,6 +30,10 @@
   <%= @meal.category.name %>
 </p>
 
+<p>
+  <strong>Ingredientes :</strong>
+
+</p>
 <% @meal.ingredients.each do |ingredient| %>
   <ul style="list-style-type:none">
     <li><%=ingredient.name%></li>
